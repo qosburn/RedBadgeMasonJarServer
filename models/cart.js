@@ -18,4 +18,5 @@ const Cart = db.define('cart', {
     allowNull: true,
   },
 });
+// note that this might not be used for project
 module.exports = Cart;
