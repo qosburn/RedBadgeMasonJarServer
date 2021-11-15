@@ -1,15 +1,15 @@
 const { Sequelize } = require('sequelize');
 
-const Sequelize = new Sequelize(process.env.DATABASE_URL, {
+const db = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
-  // Added
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-    // End Add
-  },
+  dialectOptions: !process.env.DATABASE_URL.includes('localhost')
+    ? {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false, // fixing unhandled rejection
+        },
+      }
+    : {},
 });
 
 // old stuff
